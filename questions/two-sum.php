@@ -2,30 +2,21 @@
 
 class Solution
 {
+    /**
+     * @param Integer[] $nums
+     * @param Integer $target
+     * @return Integer[]
+     */
     function twoSum($nums, $target)
     {
-        $max = 0;
-        $min = 1000000000;
-        $mini = $maxi = 0;
-        for ($i = 0; $i < count($nums); $i++) {
-            if ($nums[$i] < $min) {
-                $min = $nums[$i];
+        $arr = [];
+        foreach ($nums as $key => $num) {
+            $diff = $target - $num;
+            if (isset($arr[$diff])) {
+                return [$arr[$diff], $key];
             }
-            if ($nums[$i] > $max) {
-                $max = $nums[$i];
-            }
+            $arr[$num] = $key;
         }
-
-        if (($max + $min) == $target) {
-            return [$mini, $maxi];
-        }
-
-        if (($max + $min) < $target) {
-            $nums = array_diff($nums, [$min]);
-        } else {
-            $nums = array_diff($nums, [$max]);
-        }
-
-        return $this->twoSum($nums, $target);
+        return [];
     }
 }
